@@ -6,7 +6,7 @@ services:
     image: docker.io/cosmtrek/air # change to parsel-email/auth once on testing or production
     restart: always
     ports:
-      - '8081:8081'
+      - '8080:8080'
     volumes:
       - $PWD:$PWD
       - gocache:/root/.cache/go-build # cache for go modules; remove if not using air
@@ -17,24 +17,5 @@ services:
       - .env
     environment:
       - GOCACHE=/root/.cache/go-build # cache for go modules; remove if not using air
-    depends_on:
-      postgres:
-        condition: service_healthy
-  postgres:
-    container_name: ${APP_NAME}-postgres
-    image: pgvector/pgvector:pg17
-
-    volumes:
-      - $PWD/db/:/docker-entrypoint-initdb.d
-      - postgres:/var/lib/postgresql/data
-    env_file:
-      - .env
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 volumes:
-  postgres:
   gocache:
