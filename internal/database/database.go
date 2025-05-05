@@ -33,6 +33,8 @@ func New(dbType, dbPath string) (DB, error) {
 	switch dbType {
 	case "sqlite":
 		return NewSQLite(dbPath)
+	case "libsql":
+		return NewLibSQL(dbPath)
 	default:
 		return nil, fmt.Errorf("unsupported database type: %s", dbType)
 	}

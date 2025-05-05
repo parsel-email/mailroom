@@ -16,21 +16,21 @@ func main() {
 		dbPath = "./db.sqlite"
 	}
 
-	fmt.Printf("Testing SQLite database at %s\n", dbPath)
+	fmt.Printf("Testing libsql database at %s\n", dbPath)
 
-	// Initialize the database
-	db, err := database.NewSQLite(dbPath)
+	// Initialize the database with libsql
+	db, err := database.NewLibSQL(dbPath)
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
 	defer db.Close()
 
 	// Run extension tests
-	fmt.Println("\n=== Testing SQLite Extensions ===")
+	fmt.Println("\n=== Testing libsql Extensions ===")
 	runExtensionTests(db)
 }
 
-func runExtensionTests(db *database.SQLite) {
+func runExtensionTests(db *database.LibSQL) {
 	// Test FTS5
 	fmt.Println("\n1. Testing FTS5 Extension:")
 	testFTS5(db.GetDB())
