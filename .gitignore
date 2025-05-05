@@ -36,3 +36,5 @@ migrate
 credentials.json
 dist/
 .env.old
+db.sqlite
+bin/

@@ -18,6 +18,9 @@ type DB interface {
 
 	// GetDB returns the underlying sql.DB instance
 	GetDB() *sql.DB
+
+	// VerifyExtensions checks that required database extensions are loaded
+	VerifyExtensions() error
 }
 
 // GetDB returns the underlying sql.DB instance for SQLite
