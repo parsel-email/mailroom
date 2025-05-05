@@ -1,0 +1,40 @@
+version: '3.8'
+name: ${APP_NAME} # name of the project; change to your project name
+services:
+  air:
+    container_name: ${APP_NAME}-air # change to auth once on testing or production
+    image: docker.io/cosmtrek/air # change to parsel-email/auth once on testing or production
+    restart: always
+    ports:
+      - '8081:8081'
+    volumes:
+      - $PWD:$PWD
+      - gocache:/root/.cache/go-build # cache for go modules; remove if not using air
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    working_dir: $PWD
+    env_file:
+      - .env
+    environment:
+      - GOCACHE=/root/.cache/go-build # cache for go modules; remove if not using air
+    depends_on:
+      postgres:
+        condition: service_healthy
+  postgres:
+    container_name: ${APP_NAME}-postgres
+    image: pgvector/pgvector:pg17
+
+    volumes:
+      - $PWD/db/:/docker-entrypoint-initdb.d
+      - postgres:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+volumes:
+  postgres:
+  gocache:
