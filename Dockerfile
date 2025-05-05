@@ -15,7 +15,7 @@ RUN go mod download
 COPY . .
 
 # Build the application with security flags enabled
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o service ./cmd/api
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -o service
 
 # Stage 2: Create the minimal runtime image
 FROM alpine:3.21

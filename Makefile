@@ -1,7 +1,7 @@
 # Simple Makefile for a Go project
 
-REPO=github.com/parsel-email/service-template
-CONTAINER_REGISTRY=ghcr.io/parsel-email/service-template
+REPO=github.com/parsel-email/db
+CONTAINER_REGISTRY=ghcr.io/parsel-email/db
 # Get the current git branch
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 
