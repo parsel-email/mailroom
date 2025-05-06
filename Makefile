@@ -108,5 +108,5 @@ container-push:
   --push \
   .
 
-client-build:
-	cd client && npm run build
+sqlc:
+	sqlc generate

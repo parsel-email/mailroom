@@ -8,12 +8,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/parsel-email/lib-go/database"
+	"github.com/parsel-email/mailroom/internal/database"
 	"github.com/spf13/cobra"
-)
-
-var (
-	db *database.DB
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -41,38 +37,16 @@ func Execute() {
 
 // initDatabase initializes the database connection
 func initDatabase() {
-	dbType := getEnvWithDefault("DB_TYPE", "sqlite")
-	dbFile := getEnvWithDefault("DB_FILE", "./db.sqlite")
-
-	var err error
-
-	cfg := database.Config{
-		Path: dbFile,
-	}
-
-	db, err = database.Open(cfg)
-	if err != nil {
+	if err := database.Initialize(); err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
-
-	fmt.Printf("Connected to %s database at %s\n", dbType, dbFile)
 }
 
 // closeDatabase closes the database connection
 func closeDatabase() {
-	if db != nil {
-		if err := db.Close(); err != nil {
-			log.Printf("Error closing database: %v", err)
-		}
+	if err := database.Close(); err != nil {
+		log.Printf("Error closing database: %v", err)
 	}
-}
-
-// getEnvWithDefault returns the value of an environment variable or a default value
-func getEnvWithDefault(key, defaultValue string) string {
-	if value := os.Getenv(key); value != "" {
-		return value
-	}
-	return defaultValue
 }
 
 func init() {
