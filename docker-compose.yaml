@@ -3,7 +3,7 @@ name: ${APP_NAME} # name of the project; change to your project name
 services:
   air:
     container_name: ${APP_NAME}-air # change to auth once on testing or production
-    image: docker.io/cosmtrek/air # change to parsel-email/auth once on testing or production
+    image: docker.io/cosmtrek/air
     restart: always
     ports:
       - '${PORT}:8080'

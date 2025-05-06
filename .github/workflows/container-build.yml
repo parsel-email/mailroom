@@ -38,8 +38,8 @@ jobs:
           push: true
           platforms: linux/amd64,linux/arm64
           tags: |
-            ghcr.io/parsel-email/auth:latest
-            ghcr.io/parsel-email/auth:${{ github.sha }}
+            ghcr.io/parsel-email/mailroom:latest
+            ghcr.io/parsel-email/mailroom:${{ github.sha }}
           secrets: |
             GIT_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
           build-args: |
