@@ -18,5 +18,3 @@ require (
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/tursodatabase/go-libsql v0.0.0-20250416102726-983f7e9acb0e // indirect
 )
-
-replace github.com/parsel-email/lib-go => ../lib-go
