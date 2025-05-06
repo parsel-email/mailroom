@@ -2,21 +2,21 @@
 
 REPO=github.com/parsel-email/mailroom
 CONTAINER_REGISTRY=ghcr.io/parsel-email/mailroom
+export CGO_ENABLED=1
 # Get the current git branch
 BRANCH=$(shell git rev-parse --abbrev-ref HEAD)
 # Build flags for SQLite extensions
-BUILD_FLAGS=-tags=sqlite_fts5,sqlite_json1
 
 # Build the application
 all: build test
 
 build:
 	@echo "Building with SQLite extensions"
-	@CGO_ENABLED=1 go build $(BUILD_FLAGS) -o main main.go
+	go build -o main main.go
 
 # Run the application
 run:
-	@CGO_ENABLED=1 go run $(BUILD_FLAGS) main.go
+	go run main.go
 
 # Create DB container
 docker-run:
@@ -39,12 +39,12 @@ docker-down:
 # Test the application
 test:
 	@echo "Testing..."
-	@CGO_ENABLED=1 go test $(BUILD_FLAGS) ./... -v
+	go test ./... -v
 
 # Integrations Tests for the application
 itest:
 	@echo "Running integration tests..."
-	@CGO_ENABLED=1 go test $(BUILD_FLAGS) ./internal/database -v
+	go test ./internal/database -v
 
 # Clean the binary
 clean:
@@ -54,15 +54,15 @@ clean:
 # Database migration commands
 db-migrate:
 	@echo "Running migrations..."
-	@CGO_ENABLED=1 go run $(BUILD_FLAGS) cmd/migrate/main.go up
+	go run cmd/migrate/main.go up
 
 db-rollback:
 	@echo "Rolling back migrations..."
-	@CGO_ENABLED=1 go run $(BUILD_FLAGS) cmd/migrate/main.go down
+	go run cmd/migrate/main.go down
 
 db-status:
 	@echo "Migration status..."
-	@CGO_ENABLED=1 go run $(BUILD_FLAGS) cmd/migrate/main.go version
+	go run cmd/migrate/main.go version
 
 db-new:
 	@if [ -z "$(name)" ]; then \
@@ -70,12 +70,12 @@ db-new:
 		exit 1; \
 	fi
 	@echo "Creating new migration: $(name)"
-	@CGO_ENABLED=1 go run $(BUILD_FLAGS) cmd/migrate/main.go new $(name)
+	go run cmd/migrate/main.go new $(name)
 
 # Test SQLite extensions
 db-test:
 	@echo "Testing SQLite extensions (FTS5, JSON)..."
-	@CGO_ENABLED=1 go build $(BUILD_FLAGS) -o bin/dbtest cmd/dbtest/main.go
+	go build -o bin/dbtest cmd/dbtest/main.go
 	@./bin/dbtest
 
 # Live Reload
