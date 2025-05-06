@@ -14,6 +14,7 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       BRANCH: ${{ github.ref_name }}
+      CGO_ENABLED: 1
       
     steps:
       - name: Checkout code
