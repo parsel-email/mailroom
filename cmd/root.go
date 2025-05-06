@@ -8,7 +8,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/parsel-email/mailroom/internal/database"
+	"github.com/parsel-email/lib-go/database"
 	"github.com/spf13/cobra"
 )
 
