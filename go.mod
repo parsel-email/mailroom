@@ -6,7 +6,8 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/golang-migrate/migrate/v4 v4.18.3
 	github.com/google/uuid v1.6.0
-	github.com/parsel-email/lib-go v0.0.0-20250507023310-9ff72cc46282
+	github.com/mattn/go-sqlite3 v1.14.28
+	github.com/parsel-email/lib-go v0.0.0-20250507043108-6f023e171d54
 	github.com/prometheus/client_golang v1.22.0
 	github.com/spf13/cobra v1.9.1
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.60.0
@@ -15,7 +16,6 @@ require (
 )
 
 require (
-	github.com/asg017/sqlite-vec-go-bindings v0.1.6 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cenkalti/backoff/v4 v4.3.0 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -23,7 +23,9 @@ require (
 	github.com/go-logr/logr v1.4.2 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.26.3 // indirect
-	github.com/mattn/go-sqlite3 v1.14.28 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/knaka/go-sqlite3-fts5 v0.0.0-20240729040425-e53b86878d0d // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	github.com/prometheus/common v0.63.0 // indirect
@@ -45,7 +47,6 @@ require (
 )
 
 require (
-	github.com/golang-migrate/migrate v3.5.4+incompatible
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/joho/godotenv v1.5.1
 	github.com/spf13/pflag v1.0.6 // indirect
