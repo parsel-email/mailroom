@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS email (
     is_starred BOOLEAN DEFAULT FALSE,      -- Starred status of the email
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    server_timestamp DATETIME NOT NULL,             -- New column to store the server timestamp of the email
     FOREIGN KEY (user_id) REFERENCES "user"(provider_id) ON DELETE CASCADE,
     FOREIGN KEY (thread_id) REFERENCES thread(id) ON DELETE SET NULL,
     UNIQUE (user_id, gmail_message_id)     -- gmail_message_id should be unique per user
