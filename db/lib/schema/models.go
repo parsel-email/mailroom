@@ -5,8 +5,55 @@
 package schema
 
 import (
+	"database/sql"
 	"time"
 )
+
+type Email struct {
+	ID             int64          `json:"id"`
+	UserID         int64          `json:"user_id"`
+	ThreadID       sql.NullInt64  `json:"thread_id"`
+	GmailMessageID string         `json:"gmail_message_id"`
+	RawMimeContent string         `json:"raw_mime_content"`
+	Snippet        sql.NullString `json:"snippet"`
+	IsRead         sql.NullBool   `json:"is_read"`
+	IsStarred      sql.NullBool   `json:"is_starred"`
+	CreatedAt      time.Time      `json:"created_at"`
+	UpdatedAt      time.Time      `json:"updated_at"`
+}
+
+type EmailLabel struct {
+	EmailID int64 `json:"email_id"`
+	LabelID int64 `json:"label_id"`
+	UserID  int64 `json:"user_id"`
+}
+
+type History struct {
+	ID             int64     `json:"id"`
+	UserID         int64     `json:"user_id"`
+	GmailHistoryID string    `json:"gmail_history_id"`
+	ProcessedAt    time.Time `json:"processed_at"`
+}
+
+type Label struct {
+	ID           int64          `json:"id"`
+	UserID       int64          `json:"user_id"`
+	GmailLabelID string         `json:"gmail_label_id"`
+	Name         string         `json:"name"`
+	Type         sql.NullString `json:"type"`
+	CreatedAt    time.Time      `json:"created_at"`
+	UpdatedAt    time.Time      `json:"updated_at"`
+}
+
+type Thread struct {
+	ID            int64          `json:"id"`
+	UserID        int64          `json:"user_id"`
+	GmailThreadID string         `json:"gmail_thread_id"`
+	Snippet       sql.NullString `json:"snippet"`
+	HistoryIDRef  sql.NullString `json:"history_id_ref"`
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
+}
 
 type User struct {
 	ID         string    `json:"id"`
