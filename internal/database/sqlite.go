@@ -40,7 +40,7 @@ func Initialize() (Service, error) {
 		db: db,
 	}
 
-	fmt.Printf("Connected to libsql database at %s\n", dbFile)
+	fmt.Printf("Connected to database at %s\n", dbFile)
 	return service, nil
 }
 
