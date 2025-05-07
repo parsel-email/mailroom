@@ -27,7 +27,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 	handler = middleware.LoggingMiddleware(handler)       // Add logging
 	handler = metrics.InstrumentHandler(handler)          // Add metrics instrumentation
 	handler = middleware.AuditLogMiddleware(handler)      // Add audit logging
-	handler = middleware.RateLimitMiddleware(handler)     // Add rate limiting
 	handler = middleware.CorsMiddleware(handler)          // Add CORS
 	handler = middleware.AuthenticatedMiddleware(handler) // Add authentication
 
