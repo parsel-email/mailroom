@@ -9,8 +9,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database/sqlite3" // Changed from postgres
+	"github.com/golang-migrate/migrate"
+	"github.com/golang-migrate/migrate/database/sqlite3"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 )
 
@@ -95,7 +95,7 @@ func getMigrator(db *sql.DB, migrationsPath string) (*migrate.Migrate, error) { 
 	}
 
 	// Create driver for sqlite3
-	driver, err := sqlite3.WithInstance(db, &sqlite3.Config{}) // Changed from postgres.WithInstance
+	driver, err := sqlite3.WithInstance(db, &sqlite3.Config{})
 	if err != nil {
 		return nil, fmt.Errorf("failed to create sqlite3 driver: %w", err)
 	}

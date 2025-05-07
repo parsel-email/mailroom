@@ -72,12 +72,6 @@ db-new:
 	@echo "Creating new migration: $(name)"
 	go run cmd/migrate/main.go new $(name)
 
-# Test SQLite extensions
-db-test:
-	@echo "Testing SQLite extensions (FTS5, JSON)..."
-	go build -o bin/dbtest cmd/dbtest/main.go
-	@./bin/dbtest
-
 # Live Reload
 watch:
 	@if command -v air > /dev/null; then \
@@ -110,3 +104,6 @@ container-push:
 
 sqlc:
 	sqlc generate
+
+air:
+	docker compose up

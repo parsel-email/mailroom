@@ -8,7 +8,7 @@ import (
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/parsel-email/lib-go/database/libsql"
+	"github.com/parsel-email/lib-go/database/sqlite3"
 )
 
 // Config represents database configuration
@@ -17,16 +17,16 @@ type Config struct {
 	Path string
 }
 
-// InitializeLibSQl sets up a libsql database connection on disk
-func InitializeLibSQl() (Service, error) {
-	dbFile := getEnvWithDefault("DB_FILE", "./db.libsql")
+// Initialize sets up a libsql database connection on disk
+func Initialize() (Service, error) {
+	dbFile := getEnvWithDefault("DB_FILE", "./db.sqlite")
 
 	var err error
 
-	cfg := libsql.DefaultConfig()
+	cfg := sqlite3.DefaultConfig()
 	cfg.Path = dbFile
 
-	db, err := libsql.Open(cfg)
+	db, err := sqlite3.Open(cfg)
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize database: %w", err)
 	}

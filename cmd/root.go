@@ -5,7 +5,7 @@ package cmd
 
 import (
 	"context"
-	"database/sql" // Added import for sql.DB type assertion
+	"database/sql"
 	"fmt"
 	"net/http"
 	"os"
@@ -50,7 +50,7 @@ var rootCmd = &cobra.Command{
 		}
 
 		// Initialize the database service
-		dbService, err := database.InitializeLibSQl()
+		dbService, err := database.Initialize()
 		if err != nil {
 			logger.Error(ctx, "Failed to initialize database", "error", err)
 			os.Exit(1)
