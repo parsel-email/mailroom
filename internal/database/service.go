@@ -14,11 +14,13 @@ type BaseService interface {
 
 type Service interface {
 	BaseService
+	UserService
 	DB() *sql.DB // Added method to get the underlying *sql.DB instance
 }
 
 type service struct {
 	db *sql.DB
+	UserService
 }
 
 func (s *service) Health() map[string]string {
@@ -32,6 +34,6 @@ func (s *service) Close() error {
 }
 
 // DB returns the underlying *sql.DB instance.
-func (s *service) DB() *sql.DB { // Implemented method
+func (s *service) DB() *sql.DB {
 	return s.db
 }

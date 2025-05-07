@@ -9,12 +9,74 @@ import (
 	"context"
 )
 
+const createUser = `-- name: CreateUser :one
+INSERT INTO user (
+    id,
+    email,
+    provider,
+    provider_id
+) VALUES (
+    ?,
+    ?,
+    ?,
+    ?
+)
+RETURNING id, email, provider, provider_id, created_at
+`
+
+type CreateUserParams struct {
+	ID         string `json:"id"`
+	Email      string `json:"email"`
+	Provider   string `json:"provider"`
+	ProviderID string `json:"provider_id"`
+}
+
+func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, createUser,
+		arg.ID,
+		arg.Email,
+		arg.Provider,
+		arg.ProviderID,
+	)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Email,
+		&i.Provider,
+		&i.ProviderID,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
 const getUserByID = `-- name: GetUserByID :one
 SELECT id, email, provider, provider_id, created_at FROM user WHERE id = ?
 `
 
 func (q *Queries) GetUserByID(ctx context.Context, id string) (User, error) {
 	row := q.db.QueryRowContext(ctx, getUserByID, id)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Email,
+		&i.Provider,
+		&i.ProviderID,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
+const getUserByProviderID = `-- name: GetUserByProviderID :one
+SELECT id, email, provider, provider_id, created_at FROM user WHERE provider = ? AND provider_id = ?
+`
+
+type GetUserByProviderIDParams struct {
+	Provider   string `json:"provider"`
+	ProviderID string `json:"provider_id"`
+}
+
+func (q *Queries) GetUserByProviderID(ctx context.Context, arg GetUserByProviderIDParams) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUserByProviderID, arg.Provider, arg.ProviderID)
 	var i User
 	err := row.Scan(
 		&i.ID,
