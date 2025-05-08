@@ -4,11 +4,13 @@ Copyright © 2025 Parsel Email
 package database
 
 import (
+	"context"
 	"fmt"
 	"os"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/parsel-email/lib-go/database/sqlite3"
+	"github.com/parsel-email/lib-go/logger"
 )
 
 // Config represents database configuration
@@ -40,7 +42,7 @@ func Initialize() (Service, error) {
 		db: db,
 	}
 
-	fmt.Printf("Connected to database at %s\n", dbFile)
+	logger.Info(context.Background(), "Connected to database", "path", dbFile)
 	return service, nil
 }
 
