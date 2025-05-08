@@ -15,7 +15,6 @@ require (
 	go.opentelemetry.io/otel/trace v1.35.0
 	golang.org/x/oauth2 v0.27.0
 	google.golang.org/api v0.169.0
-	gorm.io/gorm v1.26.1
 )
 
 require (
