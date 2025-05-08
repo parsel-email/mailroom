@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -86,7 +87,7 @@ func (p *GoogleOAuthProvider) RefreshToken(ctx context.Context, refreshToken str
 // RevokeToken revokes a token with Google
 func (p *GoogleOAuthProvider) RevokeToken(ctx context.Context, token string) error {
 	if token == "" {
-		return ErrEmptyToken
+		return errors.New("empty token")
 	}
 
 	// Google's token revocation endpoint

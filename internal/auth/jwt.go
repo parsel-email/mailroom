@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"os"
 	"strings"
 
@@ -57,13 +58,13 @@ func GetIDFromJWT(token string) (string, error) {
 	// Extract the claims
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	// Get the ID from the claims
 	id, ok := claims["ID"].(string)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	return id, nil
@@ -80,13 +81,13 @@ func GetSessionIDFromJWT(token string) (string, error) {
 	// Extract the claims
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	// Get the session ID from the claims
 	sessionID, ok := claims["sessionID"].(string)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	return sessionID, nil
@@ -103,13 +104,13 @@ func GetProviderFromJWT(token string) (string, error) {
 	// Extract the claims
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	// Get the provider from the claims
 	provider, ok := claims["provider"].(string)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	return provider, nil
@@ -126,13 +127,13 @@ func GetProviderIDFromJWT(token string) (string, error) {
 	// Extract the claims
 	claims, ok := parsedToken.Claims.(jwt.MapClaims)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	// Get the provider ID from the claims
 	providerID, ok := claims["providerID"].(string)
 	if !ok {
-		return "", ErrInvalidToken
+		return "", errors.New("invalid token")
 	}
 
 	return providerID, nil
