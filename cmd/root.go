@@ -72,9 +72,6 @@ var rootCmd = &cobra.Command{
 		}
 		logger.Info(ctx, "Database migrations completed successfully")
 
-		// The auth package does not require explicit initialization with dbService here.
-		// Server handlers will use the dbService passed to server.NewServer().
-
 		server := server.NewServer(dbService) // Pass dbService to NewServer
 
 		// Create a done channel to signal when the shutdown is complete

@@ -3,17 +3,8 @@ package auth
 import (
 	"os"
 	"strings"
-	"time"
 
 	"github.com/golang-jwt/jwt"
-)
-
-// JWT related constants
-const (
-	TokenExpiryUser    = 24 * time.Hour // 24 hour expiry for user tokens
-	TokenExpiryService = 24 * time.Hour // 24 hour expiry for service tokens
-	IssuerName         = "parsel-auth-service"
-	ServiceAudience    = "parsel-services"
 )
 
 // ValidateJWT validates a JWT token

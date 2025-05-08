@@ -31,7 +31,8 @@ func NewGoogleProvider() (*GoogleOAuthProvider, error) {
 	// Read Google credentials from file
 	credentialsFile := os.Getenv("GOOGLE_CREDENTIALS_FILE")
 	if credentialsFile == "" {
-		credentialsFile = "credentials.json" // Default location
+		logger.Error(context.Background(), "GOOGLE_CREDENTIALS_FILE environment variable not set")
+		return nil, fmt.Errorf("GOOGLE_CREDENTIALS_FILE environment variable not set")
 	}
 
 	googleCreds, err := os.ReadFile(credentialsFile)

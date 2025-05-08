@@ -2,7 +2,6 @@ package auth
 
 import "errors"
 
-// Predefined errors for the auth package
 var (
 	ErrProviderNotInitialized = errors.New("auth provider not initialized")
 	ErrUnknownProvider        = errors.New("unknown auth provider")

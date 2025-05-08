@@ -26,7 +26,6 @@ func MigrateUp(db *sql.DB, migrationsPath string) error { // Changed db type
 		return fmt.Errorf("error running migrations: %w", err)
 	}
 
-	slog.Info("Database migrations completed successfully")
 	return nil
 }
 

@@ -16,16 +16,14 @@ type Server struct {
 	db   database.Service
 }
 
-func NewServer(dbService database.Service) *http.Server { // Added dbService parameter
+func NewServer(dbService database.Service) *http.Server {
 	port, _ := strconv.Atoi(os.Getenv("PORT"))
 
-	// Use the provided dbService instead of initializing a new one
 	NewServer := &Server{
 		port: port,
 		db:   dbService,
 	}
 
-	// Declare Server config
 	server := &http.Server{
 		Addr:         fmt.Sprintf(":%d", NewServer.port),
 		Handler:      NewServer.RegisterRoutes(),
