@@ -1,4 +1,3 @@
-version: '3.8'
 name: ${APP_NAME} # name of the project; change to your project name
 services:
   air:
